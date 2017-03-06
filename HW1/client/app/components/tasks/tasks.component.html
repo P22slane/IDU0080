@@ -1,0 +1,57 @@
+<form class="well" (submit)="addTask($event)" *ngIf="!updateActive">
+    <h2>Add new</h2>
+    <hr>
+      <div class="form-group col-md-6">
+        <input type="text" [(ngModel)]="title" name="title" class="form-control" placeholder="Lecture name">    
+      </div>
+      <div class="form-group col-md-6">
+        <input type="date" [(ngModel)]="date" name="date" class="form-control" >    
+      </div>
+      <div class="form-group col-md-13">
+        <input type="textbox" [(ngModel)]="description" name="description" class="form-control" placeholder="Description">    
+      </div>  
+      <div >
+            <input type="submit" value="Add new" class="btn btn-success">    
+        </div> 
+</form>
+<form class="well" (submit)="updateTask($event)" *ngIf="updateActive">
+    <h2>Update</h2>
+    <hr>
+      <div class="form-group col-md-6">
+        <input type="text" [(ngModel)]="upTitle" name="upTitle" class="form-control" placeholder={{oneTask.title}}>    
+      </div>
+      <div class="form-group col-md-6">
+        <input type="date" [(ngModel)]="upDate" name="upDate" class="form-control" >    
+      </div>
+      <div class="form-group col-md-13">
+        <input type="textbox" [(ngModel)]="upDescription" name="upDescription" class="form-control" placeholder={{oneTask.description}}>    
+      </div>  
+      <div >
+            <input type="submit" value="Update" class="btn btn-success"> 
+            <input type="button" value="Close" class="btn btn-danger" (click)="updateActive = false">      
+        </div> 
+</form>
+
+<div class="task-list">
+    <div *ngFor="let task of tasks">
+        <div class="col-md-1">
+            <input type="checkbox" [checked]="task.isDone" (click)="updateStatus(task)">
+        </div>
+        <div class="col-md-3">
+            {{task.title}}    
+        </div>
+        <div class="col-md-2">
+            {{task.date}}    
+        </div>
+        <div class="col-md-4">
+            {{task.description}}    
+        </div> 
+        <div class="col-md-1">
+            <input type="button" (click)="startUpdate(task._id)" value="Change" class="btn btn-info">    
+        </div>
+        <div class="col-md-1">
+            <input type="button" (click)="deleteTask(task._id)" value="Delete" class="btn btn-danger">    
+        </div>
+        <br><br>
+    </div>
+</div>
